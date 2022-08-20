@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace fightWithBoss
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random rand = new Random();
+            int hpHero = rand.Next(90, 201);
+            int hpEnemy = rand.Next(300, 501);
+            int damageEnemy = rand.Next(0, 25);
+            int damageHero = 10;
+            
+            Console.WriteLine("###Характеристики###");
+            Console.WriteLine($"HP у главного героя= {hpHero}");
+            Console.WriteLine($"HP у злодея= {hpEnemy}");
+            Console.WriteLine($"Базовый Damage у злодея= {damageEnemy}");
+            Console.WriteLine($"Базовый Damage у главного героя= {damageHero}\n");
+
+            while (hpEnemy > 0 && hpHero > 0)
+            {
+                Console.WriteLine("Выберете заклинания для сражения");
+            Console.WriteLine("1-Рашамон – призывает духа для нанесения атаки(Отнимает 100 хп игроку)");
+            Console.WriteLine("Выполняется после первого- Хуганзакура " +
+                "(Может быть выполнен только после призыва теневого духа), наносит 100 ед. урона");
+            Console.WriteLine("2-Межпространственный разлом – позволяет скрыться в разломе и " +
+                "восстановить 250 хп. Урон босса по вам не проходит");
+            Console.WriteLine("3-обычный удар");
+
+            Console.Write("Ваш выбор: ");
+            string inputHero = Console.ReadLine(); 
+
+                if (inputHero == "убежать")
+                {
+                    Console.WriteLine("Вы убежали с боя");
+                    break;
+                }
+
+
+                switch (inputHero)
+                {
+                    case "1":
+
+                        Console.WriteLine($"\nТы потерял -100 HP теперь у тебя: {hpHero -=100}");
+                        Console.WriteLine($"Урон по врагу -100 HP теперь у врага: {hpEnemy -= 100}");
+                        break;
+                    case "2":
+                        Console.WriteLine($"\nТы восстановил себе +250 хп {hpHero += 250}");
+                        break;
+                    case "3":
+                        Console.WriteLine($"\nУрон по врагу обычными заклинаниями в размере: {hpEnemy -= damageHero}");
+                        break;
+                    default:
+                        Console.WriteLine("\nНет такой атаки");
+                        break;
+
+                }
+                
+                Console.WriteLine("");
+                if (hpEnemy <= 0)
+                {
+                    Console.WriteLine("Вы выиграли");
+
+                }
+               else if (hpHero <= 0)
+               {
+                    Console.WriteLine("Победил злодей");
+
+               }
+               
+            }
+
+         }
+
+     }
+}
